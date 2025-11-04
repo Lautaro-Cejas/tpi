@@ -1,0 +1,13 @@
+# Archivos compilados de Ant
+/build/
+/dist/
+
+# Archivos de NetBeans
+/nbproject/private/
+/nbbuild/
+/nbdist/
+.nb-gradle/
+
+# Logs y archivos del sistema
+*.log
+.DS_Store
