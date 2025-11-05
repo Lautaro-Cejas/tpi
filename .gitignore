@@ -11,3 +11,6 @@
 # Logs y archivos del sistema
 *.log
 .DS_Store
+
+# Configuración local (credenciales)
+/src/utn/tfi/grupo7/config/config.properties
