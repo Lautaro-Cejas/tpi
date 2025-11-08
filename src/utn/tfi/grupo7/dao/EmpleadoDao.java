@@ -105,4 +105,21 @@ public class EmpleadoDao implements GenericDao<Empleado> {
                 rs.getBoolean("eliminado")
         );
     }
+
+    /**
+     * Busca un empleado por DNI (sin incluir eliminados).
+     * Necesario para cumplir el requisito TFI de búsqueda por campo relevante.
+     */
+    public Empleado getByDni(String dni, Connection conn) throws Exception {
+        String sql = "SELECT * FROM empleado WHERE dni = ? AND eliminado = 0";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, dni);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return mapRow(rs, conn); // Reutiliza el mapRow que ya tiene
+                }
+            }
+        }
+        return null; // No se encontró
+    }
 }
