@@ -13,16 +13,10 @@ public class TestConexion {
 
     public static void main(String[] args) {
 
-        Connection conn = null;
+        // Usamos try-with-resources para cerrar automáticamente la conexión
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement()) {
 
-        try {
-            // 1️⃣ Obtenemos la conexión desde DatabaseConnection
-            conn = DatabaseConnection.getConnection();
-
-            // 2️⃣ Creamos un Statement para ejecutar consultas SQL
-            Statement stmt = conn.createStatement();
-
-            // 3️⃣ Consulta para listar empleados y su legajo
             String sql = """
                 SELECT e.id AS emp_id, e.nombre, e.apellido, e.dni, e.area,
                        l.id AS legajo_id, l.nro_legajo, l.categoria, l.estado
@@ -33,8 +27,9 @@ public class TestConexion {
 
             ResultSet rs = stmt.executeQuery(sql);
 
-            // 4️⃣ Recorremos los resultados y los mostramos en consola
+            System.out.println("✅ Conexión establecida con la base de datos.");
             System.out.println("Lista de empleados con su legajo:");
+
             while (rs.next()) {
                 System.out.println(
                     "Empleado ID: " + rs.getLong("emp_id") +
@@ -49,16 +44,12 @@ public class TestConexion {
                 );
             }
 
-            // 5️⃣ Cerramos el ResultSet y Statement
             rs.close();
-            stmt.close();
+            System.out.println("🔒 Conexión cerrada correctamente.");
 
         } catch (Exception e) {
-            // Si hay un error de conexión o SQL, lo mostramos
+            System.err.println("⚠️ Error durante la conexión o consulta: " + e.getMessage());
             e.printStackTrace();
-        } finally {
-            // 6️⃣ Cerramos la conexión al final
-            DatabaseConnection.closeConnection();
         }
     }
 }
