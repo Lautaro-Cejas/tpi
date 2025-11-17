@@ -1,4 +1,12 @@
-# Trabajo Práctico Integrador: Proyecto Empresa
+## Trabajo Práctico Integrador: Proyecto Empresa
+
+## Link: https://drive.google.com/file/d/1F88fekAeF8Y0xy4Jv5DYID-RrxV9sEsP/view
+
+El dominio del proyecto se centra en la gestión de empleados y sus legajos administrativos dentro de una organización. 
+El sistema permite registrar, consultar y actualizar información básica de cada empleado, 
+junto con los datos específicos asociados a su legajo.
+
+---
 
 ## Requisitos
 - Java 17+  
